@@ -2,8 +2,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.lang.*;
 import java.util.concurrent.TimeUnit;
@@ -21,8 +23,14 @@ public class MyFrstTest {
     @Before
     public void start(){
 
+        DesiredCapabilities myCapab = new DesiredCapabilities();
+        myCapab.setCapability("unexpectedAlertBehaviour", "dismiss");
+
+        myDriver = new ChromeDriver(myCapab);
+        System.out.println(((HasCapabilities) myDriver).getCapabilities());
+
         ///System.setProperty("webdriver.chrome.driver", "C:/Selenium-test/chromedriver.exe");
-        myDriver = new ChromeDriver();
+        ///myDriver = new ChromeDriver();
         myDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         myWait = new WebDriverWait(myDriver, 10);
 
